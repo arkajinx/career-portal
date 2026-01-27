@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Detail – Career Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h2>👤 {{ student[1] }}</h2>
+
+<p>
+<b>Class:</b> {{ student[2] }} <br>
+<b>Stream:</b> {{ student[3] }} <br>
+<b>Submitted:</b> {{ student[6] if student|length > 6 else "" }}
+</p>
+
+<hr>
+
+<h3>🧠 Psychometric Scores</h3>
+
+<ul>
+{% for k, v in scores.items() %}
+    <li><b>{{ k.capitalize() }}</b> : {{ v }}</li>
+{% endfor %}
+</ul>
+
+<h3>🎯 Top Career Matches</h3>
+
+<ul>
+{% for r in recs %}
+    <li>{{ r[0] }} — Match Score {{ r[1] }}</li>
+{% endfor %}
+</ul>
+
+<p>
+    <a href="/dashboard">⬅ Back to Dashboard</a>
+</p>
+
+</body>
+</html>

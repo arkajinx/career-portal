@@ -1,0 +1,100 @@
+/* ---------- GLOBAL ---------- */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+h2, h3 {
+    color: #1f3c88;
+}
+
+a {
+    color: #1f6ad2;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- LOGIN PAGE ---------- */
+
+form {
+    background: white;
+    max-width: 380px;
+    margin: 80px auto;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #1f6ad2;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #174ea6;
+}
+
+/* ---------- DASHBOARD ---------- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 20px;
+}
+
+th {
+    background-color: #1f3c88;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* ---------- STUDENT DETAIL ---------- */
+
+ul {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    list-style: none;
+    max-width: 500px;
+}
+
+ul li {
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
