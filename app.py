@@ -1012,6 +1012,29 @@ def logout():
     session.pop("teacher",None)
     return redirect("/")
 
+@app.route("/__create_admin")
+def create_admin():
+
+    con = get_db()
+
+    cur = con.execute(
+        "SELECT * FROM teachers WHERE username=?",
+        ("admin",)
+    )
+
+    if cur.fetchone():
+        con.close()
+        return "Admin already exists"
+
+    con.execute("""
+        INSERT INTO teachers (username,password)
+        VALUES (?,?)
+    """, ("admin","admin123"))
+
+    con.commit()
+    con.close()
+
+    return "Admin created successfully"
 
 # ===============================
 # RUN
@@ -1019,3 +1042,4 @@ def logout():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
