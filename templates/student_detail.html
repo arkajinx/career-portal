@@ -1,40 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Detail – Career Portal</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Student Detail</title>
 </head>
 <body>
 
-<h2>👤 {{ student[1] }}</h2>
+<h2>{{ student[1] }} - Career Profile</h2>
 
-<p>
-<b>Class:</b> {{ student[2] }} <br>
-<b>Stream:</b> {{ student[3] }} <br>
-<b>Submitted:</b> {{ student[6] if student|length > 6 else "" }}
-</p>
+<a href="/dashboard">⬅ Back</a>
 
 <hr>
 
-<h3>🧠 Psychometric Scores</h3>
-
+<h3>Psychometric Scores</h3>
 <ul>
-{% for k, v in scores.items() %}
-    <li><b>{{ k.capitalize() }}</b> : {{ v }}</li>
+{% for k,v in scores.items() %}
+  <li>{{ k }} : {{ v }}</li>
 {% endfor %}
 </ul>
 
-<h3>🎯 Top Career Matches</h3>
+<hr>
 
+<h3>Top Careers</h3>
+<ol>
+{% for c,s in recs %}
+  <li>{{ c }} ({{ s }})</li>
+{% endfor %}
+</ol>
+
+<hr>
+
+<form method="post">
+
+<h3>Exam Type</h3>
+<select name="exam">
+  <option value="JEE" {% if exam=="JEE" %}selected{% endif %}>JEE</option>
+  <option value="NEET" {% if exam=="NEET" %}selected{% endif %}>NEET</option>
+</select>
+
+<h3>Preferred Location</h3>
+<select name="state">
+  <option value="">--Select--</option>
+  <option value="West Bengal" {% if selected_state=="West Bengal" %}selected{% endif %}>West Bengal</option>
+  <option value="India" {% if selected_state=="India" %}selected{% endif %}>All India</option>
+  <option value="West" {% if selected_state=="West" %}selected{% endif %}>USA / Europe</option>
+</select>
+
+<br><br>
+
+<button type="submit">🔍 Show Courses & Colleges</button>
+
+</form>
+
+<hr>
+
+{% if courses %}
+<h3>Recommended Courses</h3>
+<ol>
+{% for c,s in courses %}
+  <li>{{ c }} (score {{ s }})</li>
+{% endfor %}
+</ol>
+{% endif %}
+
+{% if cutoff %}
+<h3>Estimated Cutoff Score: {{ cutoff }}</h3>
+{% endif %}
+
+<hr>
+
+{% if colleges %}
+<h3>Colleges</h3>
+
+{% for career, clgs in colleges.items() %}
+<h4>{{ career }}</h4>
 <ul>
-{% for r in recs %}
-    <li>{{ r[0] }} — Match Score {{ r[1] }}</li>
+{% for c,u in clgs %}
+<li><a href="{{ u }}" target="_blank">{{ c }}</a></li>
 {% endfor %}
 </ul>
+{% endfor %}
 
-<p>
-    <a href="/dashboard">⬅ Back to Dashboard</a>
-</p>
+{% endif %}
+
+<hr>
+
+<h3>AI Counselling Summary</h3>
+<p>{{ summary }}</p>
+
+<hr>
+
+<a href="/report/{{ student[0] }}">
+  <button>📄 Download PDF Report</button>
+</a>
 
 </body>
 </html>
