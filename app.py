@@ -886,7 +886,7 @@ def student_detail(sid):
 
     college_results = {}
 
-    if state:
+    if state and state != "":
         for c,_ in careers:
             college_results[c] = INDIAN_COLLEGES.get(c,{}).get(state,[])
 
@@ -1014,5 +1014,6 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
