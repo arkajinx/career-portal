@@ -1,19 +1,41 @@
-/* ---------- GLOBAL ---------- */
+/* ============================
+   GLOBAL THEME
+============================ */
+
+:root {
+    --primary: #2563eb;
+    --secondary: #059669;
+    --danger: #dc2626;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1f2933;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+}
+
+* {
+    box-sizing: border-box;
+}
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f6f9;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
     margin: 0;
-    padding: 20px;
-    color: #333;
+    padding: 24px;
+    color: var(--text);
 }
 
 h2, h3 {
-    color: #1f3c88;
+    color: #0f172a;
+    margin-bottom: 12px;
 }
 
+/* ============================
+   LINKS
+============================ */
+
 a {
-    color: #1f6ad2;
+    color: var(--primary);
     text-decoration: none;
 }
 
@@ -21,80 +43,171 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ---------- LOGIN PAGE ---------- */
+/* ============================
+   LOGIN CARD
+============================ */
 
-form {
-    background: white;
+form.login-form {
+    background: var(--card);
     max-width: 380px;
-    margin: 80px auto;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 90px auto;
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
 }
 
-input {
+input,
+select {
     width: 100%;
-    padding: 8px;
+    padding: 10px 12px;
     margin-top: 6px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 14px;
 }
 
-button {
-    background-color: #1f6ad2;
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* ============================
+   BUTTON SYSTEM
+============================ */
+
+button,
+.btn {
+    background: var(--primary);
     color: white;
     border: none;
-    padding: 10px;
-    width: 100%;
-    border-radius: 5px;
-    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
     cursor: pointer;
+    transition: background 0.15s ease, transform 0.12s ease;
+    white-space: nowrap;
 }
 
-button:hover {
-    background-color: #174ea6;
+button:hover,
+.btn:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
 }
 
-/* ---------- DASHBOARD ---------- */
+/* Action colors */
 
-table {
+.btn-open { background: var(--primary); }
+.btn-pdf { background: var(--secondary); }
+.btn-delete { background: var(--danger); }
+
+.btn-delete:hover {
+    background: #b91c1c;
+}
+
+/* ============================
+   DASHBOARD TABLE
+============================ */
+
+.dashboard-table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
+    background: var(--card);
     margin-top: 20px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.06);
 }
 
-th {
-    background-color: #1f3c88;
+.dashboard-table th {
+    background: #0f172a;
     color: white;
-    padding: 10px;
+    padding: 12px;
+    font-size: 13px;
+    text-align: left;
 }
 
-td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+.dashboard-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
 }
 
-tr:hover {
-    background-color: #f1f1f1;
+.dashboard-table tr:hover {
+    background: #f1f5f9;
 }
 
-/* ---------- STUDENT DETAIL ---------- */
+/* ============================
+   INLINE FORMS IN TABLES
+============================ */
 
-ul {
-    background: white;
-    padding: 15px;
-    border-radius: 6px;
-    list-style: none;
-    max-width: 500px;
+.inline-form {
+    display: inline-block;
+    margin: 0;
 }
 
-ul li {
-    padding: 6px 0;
-    border-bottom: 1px solid #eee;
+/* ============================
+   STUDENT DETAIL LAYOUT
+============================ */
+
+.card {
+    background: var(--card);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 12px 26px rgba(0,0,0,0.06);
+    margin-bottom: 18px;
 }
 
-ul li:last-child {
+.skill-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.skill-list li:last-child {
     border-bottom: none;
+}
+
+/* ============================
+   SELECT BOXES / FILTERS
+============================ */
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.filter-bar select,
+.filter-bar button {
+    max-width: 200px;
+}
+
+/* ============================
+   PDF BUTTON
+============================ */
+
+.download-btn {
+    background: #7c3aed;
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+
+@media (max-width: 900px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .dashboard-table {
+        font-size: 12px;
+    }
+
+    .filter-bar {
+        flex-direction: column;
+    }
 }
