@@ -211,3 +211,20 @@ button:hover,
         flex-direction: column;
     }
 }
+/* ============================
+   HEADER BAR
+============================ */
+
+.header {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: #0f172a;
+}
+
+.header span {
+    color: var(--primary);
+}
+
+
