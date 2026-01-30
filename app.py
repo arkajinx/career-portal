@@ -36,211 +36,247 @@ CAREER_RULES = {
     # ======================
 
     "Computer Science / IT": {
+        "stream": ["Science"],
         "technical": 4,
         "logical": 4,
         "numerical": 3
     },
 
     "Mechanical / Electrical Engineering": {
+        "stream": ["Science"],
         "technical": 3,
         "numerical": 4,
         "logical": 3
     },
 
     "Civil / Infrastructure Engineering": {
+        "stream": ["Science"],
         "numerical": 4,
         "logical": 3
     },
 
     "Electronics / Robotics": {
+        "stream": ["Science"],
         "technical": 4,
         "logical": 4
     },
 
     "Cybersecurity / AI / Data Science": {
+        "stream": ["Science"],
         "technical": 4,
         "logical": 4,
         "numerical": 4
     },
 
     # ======================
-    # MEDICAL / LIFE SCI
+    # MEDICAL
     # ======================
 
     "MBBS / Clinical Medicine": {
+        "stream": ["Science"],
         "numerical": 4,
         "communication": 3,
         "logical": 3
     },
 
     "Dentistry / Allied Health": {
+        "stream": ["Science"],
         "numerical": 3,
         "communication": 3
     },
 
     "Biotechnology / Genetics": {
+        "stream": ["Science"],
         "technical": 3,
         "numerical": 3
     },
 
     "Nursing / Public Health": {
+        "stream": ["Science"],
         "communication": 4
     },
 
     "Pharmacy / Pharma Research": {
+        "stream": ["Science"],
         "numerical": 3,
         "technical": 3
     },
 
     # ======================
-    # BUSINESS / COMMERCE
+    # COMMERCE
     # ======================
 
     "Management / MBA Track": {
+        "stream": ["Commerce"],
         "leadership": 4,
         "communication": 4
     },
 
     "Chartered Accountancy / Audit": {
+        "stream": ["Commerce"],
         "numerical": 5,
         "logical": 4
     },
 
     "Finance / Investment Banking": {
+        "stream": ["Commerce"],
         "numerical": 5,
         "logical": 4
     },
 
     "Entrepreneurship / Startup": {
+        "stream": ["Commerce"],
         "leadership": 4,
         "creativity": 3
     },
 
     "Marketing / Brand Strategy": {
+        "stream": ["Commerce"],
         "communication": 4,
         "creativity": 3
     },
 
     "Human Resource Management": {
+        "stream": ["Commerce"],
         "communication": 4,
         "leadership": 3
     },
 
     # ======================
-    # LAW / GOVERNMENT
+    # LAW / GOV
     # ======================
 
     "Law / Judiciary": {
+        "stream": ["Arts", "Humanities", "Commerce"],
         "logical": 4,
         "communication": 4
     },
 
     "Civil Services / UPSC": {
+        "stream": ["Arts", "Humanities", "Commerce", "Science"],
         "logical": 4,
         "leadership": 4
     },
 
     "Defence Services": {
+        "stream": ["Arts", "Science"],
         "leadership": 4,
         "logical": 3
     },
 
     "Public Policy / Administration": {
+        "stream": ["Arts", "Humanities"],
         "logical": 4,
         "communication": 3
     },
 
     # ======================
-    # ARTS / HUMANITIES
+    # ARTS
     # ======================
 
     "Psychology / Counselling": {
+        "stream": ["Arts", "Humanities"],
         "communication": 4,
         "leadership": 3
     },
 
     "Sociology / Social Work": {
+        "stream": ["Arts", "Humanities"],
         "communication": 4
     },
 
     "History / Political Science": {
+        "stream": ["Arts", "Humanities"],
         "logical": 3
     },
 
     "Journalism / Mass Communication": {
+        "stream": ["Arts", "Humanities"],
         "communication": 4,
         "creativity": 3
     },
 
     "Teaching / Academia": {
+        "stream": ["Arts", "Humanities"],
         "communication": 4,
         "logical": 3
     },
 
     # ======================
-    # DESIGN / CREATIVE
+    # DESIGN
     # ======================
 
     "Fashion / Product Design": {
+        "stream": ["Arts", "Humanities"],
         "creativity": 5
     },
 
     "Animation / Game Design": {
+        "stream": ["Arts", "Science"],
         "creativity": 5,
         "technical": 3
     },
 
     "Architecture / Urban Design": {
+        "stream": ["Science", "Arts"],
         "creativity": 4,
         "numerical": 3
     },
 
     "Fine Arts / Illustration": {
+        "stream": ["Arts"],
         "creativity": 5
     },
 
     "Photography / Film Making": {
+        "stream": ["Arts"],
         "creativity": 4,
         "communication": 3
     },
 
     # ======================
-    # MEDIA / DIGITAL
+    # MEDIA
     # ======================
 
     "Content Creation / Influencer": {
+        "stream": ["Arts", "Commerce"],
         "creativity": 4,
         "communication": 4
     },
 
     "Advertising / PR": {
+        "stream": ["Arts", "Commerce"],
         "communication": 4,
         "creativity": 3
     },
 
     # ======================
-    # SPORTS / FITNESS
+    # SPORTS
     # ======================
 
     "Sports Science / Athlete": {
+        "stream": ["Science"],
         "leadership": 3
     },
 
     "Sports Management": {
+        "stream": ["Commerce"],
         "leadership": 4,
         "communication": 3
     },
 
     # ======================
-    # ENVIRONMENT / GEO
+    # ENVIRONMENT
     # ======================
 
     "Environmental Science": {
+        "stream": ["Science"],
         "logical": 3,
         "numerical": 3
     },
 
     "Geology / Earth Sciences": {
+        "stream": ["Science"],
         "numerical": 3
     }
 }
@@ -252,238 +288,58 @@ CAREER_RULES = {
 
 COURSE_RULES = {
 
-    # ======================
-    # ENGINEERING / TECH
-    # ======================
-
     "BTech Computer Science": {
         "career": "Computer Science / IT",
+        "stream": ["Science"],
         "technical": 4,
         "logical": 4,
         "numerical": 3,
-        "jee": True
+        "exam": "JEE"
     },
-
-    "BTech Mechanical": {
-        "career": "Mechanical / Electrical Engineering",
-        "technical": 3,
-        "numerical": 4,
-        "jee": True
-    },
-
-    "BTech Electrical": {
-        "career": "Mechanical / Electrical Engineering",
-        "technical": 3,
-        "numerical": 4,
-        "jee": True
-    },
-
-    "BTech Civil": {
-        "career": "Civil / Infrastructure Engineering",
-        "numerical": 4,
-        "jee": True
-    },
-
-    "BTech Electronics": {
-        "career": "Electronics / Robotics",
-        "technical": 4,
-        "logical": 4,
-        "jee": True
-    },
-
-    "BTech AI / Data Science": {
-        "career": "Cybersecurity / AI / Data Science",
-        "technical": 4,
-        "logical": 4,
-        "numerical": 4,
-        "jee": True
-    },
-
-    # ======================
-    # MEDICAL / LIFE SCI
-    # ======================
 
     "MBBS": {
         "career": "MBBS / Clinical Medicine",
+        "stream": ["Science"],
         "numerical": 4,
         "logical": 3,
-        "neet": True
+        "exam": "NEET"
     },
-
-    "BDS (Dentistry)": {
-        "career": "Dentistry / Allied Health",
-        "numerical": 3,
-        "neet": True
-    },
-
-    "BSc Nursing": {
-        "career": "Nursing / Public Health",
-        "communication": 4,
-        "neet": True
-    },
-
-    "BPharm": {
-        "career": "Pharmacy / Pharma Research",
-        "numerical": 3,
-        "technical": 3
-    },
-
-    "BSc Biotechnology": {
-        "career": "Biotechnology / Genetics",
-        "technical": 3,
-        "numerical": 3
-    },
-
-    # ======================
-    # BUSINESS / COMMERCE
-    # ======================
 
     "BCom / CA Track": {
         "career": "Chartered Accountancy / Audit",
+        "stream": ["Commerce"],
         "numerical": 5,
-        "logical": 4
+        "logical": 4,
+        "exam": "CA"
     },
 
     "BBA": {
         "career": "Management / MBA Track",
+        "stream": ["Commerce"],
         "communication": 4,
-        "leadership": 3
+        "leadership": 3,
+        "exam": "IPMAT"
     },
-
-    "BMS (Management Studies)": {
-        "career": "Management / MBA Track",
-        "leadership": 4
-    },
-
-    "BA Economics": {
-        "career": "Finance / Investment Banking",
-        "numerical": 5,
-        "logical": 4
-    },
-
-    "Entrepreneurship Degree": {
-        "career": "Entrepreneurship / Startup",
-        "leadership": 4,
-        "creativity": 3
-    },
-
-    # ======================
-    # LAW / GOVERNMENT
-    # ======================
 
     "BA LLB / BBA LLB": {
         "career": "Law / Judiciary",
+        "stream": ["Arts", "Commerce"],
         "logical": 4,
-        "clat": True
+        "exam": "CLAT"
     },
-
-    "Integrated UPSC Track": {
-        "career": "Civil Services / UPSC",
-        "logical": 4,
-        "leadership": 4
-    },
-
-    "Defence Studies": {
-        "career": "Defence Services",
-        "leadership": 4
-    },
-
-    # ======================
-    # ARTS / HUMANITIES
-    # ======================
 
     "BA Psychology": {
         "career": "Psychology / Counselling",
-        "communication": 4
-    },
-
-    "BA Sociology": {
-        "career": "Sociology / Social Work",
-        "communication": 4
-    },
-
-    "BA Journalism": {
-        "career": "Journalism / Mass Communication",
+        "stream": ["Arts"],
         "communication": 4,
-        "creativity": 3
+        "exam": "CUET"
     },
 
-    "BEd / Teaching": {
-        "career": "Teaching / Academia",
-        "communication": 4
-    },
-
-    # ======================
-    # DESIGN / CREATIVE
-    # ======================
-
-    "BDes (Fashion/Product)": {
+    "BDes": {
         "career": "Fashion / Product Design",
-        "creativity": 5
-    },
-
-    "BArch": {
-        "career": "Architecture / Urban Design",
-        "creativity": 4,
-        "numerical": 3,
-        "nata": True
-    },
-
-    "BFA / Fine Arts": {
-        "career": "Fine Arts / Illustration",
-        "creativity": 5
-    },
-
-    "Animation Degree": {
-        "career": "Animation / Game Design",
+        "stream": ["Arts"],
         "creativity": 5,
-        "technical": 3
-    },
-
-    # ======================
-    # MEDIA / DIGITAL
-    # ======================
-
-    "Advertising / PR Degree": {
-        "career": "Advertising / PR",
-        "communication": 4,
-        "creativity": 3
-    },
-
-    "Content Creation Degree": {
-        "career": "Content Creation / Influencer",
-        "creativity": 4,
-        "communication": 4
-    },
-
-    # ======================
-    # SPORTS / FITNESS
-    # ======================
-
-    "BSc Sports Science": {
-        "career": "Sports Science / Athlete",
-        "leadership": 3
-    },
-
-    "Sports Management Degree": {
-        "career": "Sports Management",
-        "leadership": 4,
-        "communication": 3
-    },
-
-    # ======================
-    # ENVIRONMENT / GEO
-    # ======================
-
-    "BSc Environmental Science": {
-        "career": "Environmental Science",
-        "logical": 3,
-        "numerical": 3
-    },
-
-    "BSc Geology": {
-        "career": "Geology / Earth Sciences",
-        "numerical": 3
+        "exam": "NIFT"
     }
 }
 
@@ -688,7 +544,12 @@ INDIAN_COLLEGES = {
 
 }
 
-
+DEFAULT_EXAMS = {
+    "Science": "JEE",
+    "Commerce": "IPMAT",
+    "Arts": "CUET",
+    "Humanities": "CUET"
+}
 # ===============================
 # DATABASE SETUP
 # ===============================
@@ -701,16 +562,18 @@ def init_db():
     con = get_db()
 
     con.execute("""
-      CREATE TABLE IF NOT EXISTS responses(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        class_name TEXT,
-        stream TEXT,
-        psychometric TEXT,
-        recommendations TEXT,
-        created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )
-    """)
+  CREATE TABLE IF NOT EXISTS responses(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    class_name TEXT,
+    stream TEXT,
+    psychometric TEXT,
+    recommendations TEXT,
+    exam TEXT,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  )
+""")
+
 
     con.execute("""
       CREATE TABLE IF NOT EXISTS teachers(
@@ -730,74 +593,168 @@ init_db()
 # CORE ENGINES
 # ===============================
 
-def compute_recommendations(scores):
+def compute_recommendations(scores, stream):
 
     ranked = []
 
     for career, rules in CAREER_RULES.items():
-        score = sum(
-            1 for k,v in rules.items()
-            if scores.get(k,0) >= v
-        )
 
-        ranked.append((career, score))
-
-    ranked.sort(key=lambda x:x[1], reverse=True)
-
-    return ranked[:5]
-
-
-def compute_courses(scores, exam):
-
-    ranked = []
-
-    for course, rules in COURSE_RULES.items():
+        # ---------- STREAM FILTER ----------
+        if stream and stream not in rules.get("stream", []):
+            continue
 
         score = 0
 
-        if rules.get("jee") and exam == "JEE":
-            score += 2
+        for k, v in rules.items():
+            if k == "stream":
+                continue
 
-        if rules.get("neet") and exam == "NEET":
-            score += 2
+            if scores.get(k, 0) >= v:
+                score += 1
 
-        for k,v in rules.items():
-            if k in scores and scores[k] >= v:
+        ranked.append((career, score))
+
+    ranked.sort(key=lambda x: x[1], reverse=True)
+
+    return ranked[:6]
+
+
+def compute_courses(scores, exams=None, stream=None):
+
+    if isinstance(exams, str):
+        exams = [e.strip().upper() for e in exams.split(",")]
+
+    ranked = []
+    detected_exams = set()
+
+    for course, rules in COURSE_RULES.items():
+
+        if stream and stream not in rules.get("stream", []):
+            continue
+
+        course_exam = rules.get("exam")
+
+        if exams and course_exam and course_exam not in exams:
+            continue
+
+        score = 0
+
+        for k, v in rules.items():
+            if k in ["career", "stream", "exam"]:
+                continue
+
+            if scores.get(k, 0) >= v:
                 score += 1
 
         ranked.append((course, score))
 
-    ranked.sort(key=lambda x:x[1], reverse=True)
+        if course_exam:
+            detected_exams.add(course_exam)
 
-    return ranked[:5]
+    ranked.sort(key=lambda x: x[1], reverse=True)
+
+    return ranked[:6], sorted(detected_exams)
+
+
 
 
 def estimate_cutoff(scores, exam):
 
-    avg = sum(scores.values()) / len(scores)
+    avg = sum(scores.values()) / max(len(scores), 1)
 
+
+    exam = (exam or "").upper()
+
+    # -------------------------
+    # ENGINEERING
+    # -------------------------
     if exam == "JEE":
-        return round(60 + avg * 8, 1)
+        # Percentile estimate
+        val = 55 + avg * 9
+        return min(99.9, round(val, 1))
 
+    # -------------------------
+    # MEDICAL
+    # -------------------------
     if exam == "NEET":
-        return round(250 + avg * 40, 1)
+        # Marks out of 720
+        val = 220 + avg * 45
+        return min(720, round(val))
+
+    # -------------------------
+    # CENTRAL UNIVERSITIES
+    # -------------------------
+    if exam == "CUET":
+        # Percentile style
+        val = 50 + avg * 8
+        return min(99.5, round(val, 1))
+
+    # -------------------------
+    # MANAGEMENT
+    # -------------------------
+    if exam == "IPMAT":
+        # Score approx /400
+        val = 120 + avg * 22
+        return min(400, round(val))
+
+    # -------------------------
+    # CA FOUNDATION
+    # -------------------------
+    if exam == "CA":
+        # Marks /400
+        val = 140 + avg * 20
+        return min(400, round(val))
+
+    # -------------------------
+    # LAW
+    # -------------------------
+    if exam == "CLAT":
+        # Score /150
+        val = 60 + avg * 12
+        return min(150, round(val))
+
+    # -------------------------
+    # DESIGN
+    # -------------------------
+    if exam in ["NIFT", "NATA"]:
+        val = 70 + avg * 15
+        return min(200, round(val))
 
     return None
 
 
-def ai_summary(student, scores, careers, courses):
+def ai_summary(student, scores, careers, courses, exam=None):
 
-    strengths = sorted(scores, key=scores.get, reverse=True)[:3]
+    name = student[1]
+    stream = student[3]
+
+    ordered = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+
+    strengths = [k.replace("_"," ").title() for k,_ in ordered[:3]]
+    gaps = [k.replace("_"," ").title() for k,_ in ordered[-2:]]
+
+    top_careers = ", ".join([c[0] for c in careers[:2]])
+    top_courses = ", ".join([c[0] for c in courses[:2]])
+
+    exam_line = ""
+    if exam:
+        exam_line = (
+            f"The recommended primary entrance pathway at this stage is {exam}. "
+            "Structured preparation with regular mock testing is advised."
+        )
 
     return f"""
-{student[1]} demonstrates strong aptitude in {', '.join(strengths)}.
+{name} from the {stream} stream demonstrates pronounced aptitude in {', '.join(strengths)}.
 
-Top career tracks include {careers[0][0]} and {careers[1][0]}.
+Based on the psychometric profile, career domains such as {top_careers} appear well aligned. Corresponding undergraduate programmes including {top_courses} merit serious consideration.
 
-Recommended course focus: {courses[0][0]} and {courses[1][0]}.
+Relative improvement is recommended in {', '.join(gaps)}. Targeted mentoring, concept reinforcement and assessment-driven preparation may substantially enhance readiness for competitive admissions.
 
-With structured preparation the student can perform well in competitive exams.
+{exam_line}
+
+Overall, the student shows promising academic potential when guided through a structured, data-driven counselling and preparation framework.
 """
+
 
 # ===============================
 # GOOGLE FORM API
@@ -823,22 +780,26 @@ def submit():
         "technical": safe_int(data.get("Technical Skills"))
     }
 
-    exam = data.get("Competitive Exam","JEE")
+    
 
-    top5 = compute_recommendations(scores)
+    stream = data.get("Stream Opted in Class 12", "")
+    exam = data.get("Competitive Exam",DEFAULT_EXAMS.get(stream, "CUET"))
+
+    top5 = compute_recommendations(scores, stream)
 
     con = get_db()
 
     con.execute("""
       INSERT INTO responses
-      (name,class_name,stream,psychometric,recommendations)
-      VALUES(?,?,?,?,?)
+(name,class_name,stream,psychometric,recommendations,exam)
+VALUES(?,?,?,?,?,?)
+
     """, (
         data.get("Full Name of Student",""),
         data.get("Class",""),
         data.get("Stream Opted in Class 12",""),
         json.dumps(scores),
-        json.dumps(top5)
+        json.dumps(top5),exam
     ))
 
     con.commit()
@@ -860,10 +821,7 @@ def login():
         p = request.form["password"]
 
         con = get_db()
-        cur = con.execute(
-            "SELECT * FROM teachers WHERE username=? AND password=?",
-            (u,p)
-        )
+        cur = con.execute("SELECT * FROM teachers WHERE username=? AND password=?",(u,p))
 
         row = cur.fetchone()
         con.close()
@@ -883,11 +841,7 @@ def dashboard():
 
     con = get_db()
 
-    rows = con.execute("""
-      SELECT id,name,class_name,stream,created
-      FROM responses
-      ORDER BY created DESC
-    """).fetchall()
+    rows = con.execute("""SELECT id,name,class_name,stream,exam,created FROM responses ORDER BY created DESC""").fetchall()
 
     con.close()
 
@@ -904,19 +858,30 @@ def student_detail(sid):
     if "teacher" not in session:
         return redirect("/")
 
-    state = request.form.get("state")
-    exam = request.form.get("exam","JEE")
-
     con = get_db()
-    row = con.execute(
-        "SELECT * FROM responses WHERE id=?", (sid,)
-    ).fetchone()
+    row = con.execute("SELECT * FROM responses WHERE id=?", (sid,)).fetchone()
     con.close()
+    if not row:
+        return "Student not found", 404
+    
 
+    state = request.form.get("state")
+    stream = row[3]
+
+
+
+    stored_exam = row[6]
+
+    exam = request.form.get("exam",stored_exam or DEFAULT_EXAMS.get(stream, "CUET"))
+
+
+
+    
     scores = json.loads(row[4])
     careers = json.loads(row[5])
 
-    courses = compute_courses(scores, exam)
+    courses, detected_exams = compute_courses(scores, exam, row[3])
+
     cutoff = estimate_cutoff(scores, exam)
 
     college_results = {}
@@ -925,7 +890,8 @@ def student_detail(sid):
         for c,_ in careers:
             college_results[c] = INDIAN_COLLEGES.get(c,{}).get(state,[])
 
-    summary = ai_summary(row, scores, careers, courses)
+    summary = ai_summary(row, scores, careers, courses, exam)
+
 
     return render_template(
         "student_detail.html",
@@ -952,16 +918,20 @@ def report(sid):
         return redirect("/")
 
     con = get_db()
-    row = con.execute(
-        "SELECT * FROM responses WHERE id=?", (sid,)
-    ).fetchone()
+    row = con.execute("SELECT * FROM responses WHERE id=?", (sid,)).fetchone()
     con.close()
 
     scores = json.loads(row[4])
     careers = json.loads(row[5])
-    courses = compute_courses(scores,"JEE")
+    stream = row[3]
 
-    summary = ai_summary(row,scores,careers,courses)
+    exam = DEFAULT_EXAMS.get(stream, "CUET")
+
+    courses, _ = compute_courses(scores, exam, stream)
+
+    summary = ai_summary(row, scores, careers, courses, exam)
+
+
 
     fname = f"report_{sid}.pdf"
     path = os.path.join(DATA_DIR,fname)
@@ -976,6 +946,8 @@ def report(sid):
 
     story.append(Paragraph(f"<b>Name:</b> {row[1]}",styles["Normal"]))
     story.append(Paragraph(f"<b>Class:</b> {row[2]}",styles["Normal"]))
+    story.append(Paragraph(f"<b>Entrance Exam(s):</b> {exam}", styles["Normal"]))
+
 
     data=[["Skill","Score"]] + [[k,v] for k,v in scores.items()]
     story.append(Table(data))
@@ -1042,4 +1014,5 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
