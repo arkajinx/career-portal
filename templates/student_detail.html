@@ -40,13 +40,21 @@
 
 <h3>Exam Type</h3>
 <select name="exam">
-  <option value="JEE" {% if exam=="JEE" %}selected{% endif %}>JEE</option>
-  <option value="NEET" {% if exam=="NEET" %}selected{% endif %}>NEET</option>
+
+  <option value="JEE" {% if exam=="JEE" %}selected{% endif %}>JEE (Engineering)</option>
+  <option value="NEET" {% if exam=="NEET" %}selected{% endif %}>NEET (Medical)</option>
+  <option value="CUET" {% if exam=="CUET" %}selected{% endif %}>CUET (Arts / Science)</option>
+  <option value="IPMAT" {% if exam=="IPMAT" %}selected{% endif %}>IPMAT (Management)</option>
+  <option value="CA" {% if exam=="CA" %}selected{% endif %}>CA Foundation</option>
+  <option value="CLAT" {% if exam=="CLAT" %}selected{% endif %}>CLAT (Law)</option>
+  <option value="NIFT" {% if exam=="NIFT" %}selected{% endif %}>NIFT (Design)</option>
+
 </select>
+
 
 <h3>Preferred Location</h3>
 <select name="state">
-  <option value="">--Select--</option>
+  <option value="">Select location</option>
   <option value="West Bengal" {% if selected_state=="West Bengal" %}selected{% endif %}>West Bengal</option>
   <option value="India" {% if selected_state=="India" %}selected{% endif %}>All India</option>
   <option value="West" {% if selected_state=="West" %}selected{% endif %}>USA / Europe</option>
@@ -102,5 +110,6 @@
 
 </body>
 </html>
+
 
 
