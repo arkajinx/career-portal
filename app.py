@@ -917,8 +917,9 @@ def student_detail(sid):
 
 
     
-    scores = json.loads(row[4])
-    careers = json.loads(row[5])
+    scores = row[4] or {}
+    careers = row[5] or []
+
 
     courses, detected_exams = compute_courses(scores, exam, row[3])
 
@@ -1055,6 +1056,7 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
