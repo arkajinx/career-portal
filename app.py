@@ -12,22 +12,11 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
 
 app = Flask(__name__)
-app.secret_key = "spark-school-secret"
-
-# ===============================
-# DATABASE PATH (Render + Local)
-# ===============================
-
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-DATA_DIR = os.environ.get(
-    "RENDER_DATA_DIR",
-    os.path.join(BASE_DIR, "data")
-)
-
+DATA_DIR = os.path.join(BASE_DIR, "data")
 os.makedirs(DATA_DIR, exist_ok=True)
 
-DB = os.path.join(DATA_DIR, "career.db")
 
 # ===============================
 # CAREER RULE ENGINE
@@ -558,7 +547,7 @@ DEFAULT_EXAMS = {
 # ===============================
 
 def get_db():
-    return psycopg2.connect(os.environ["SUPABASE_DB_URL"])
+    return psycopg2.connect(os.environ["SUPABASE_DB_URL"],sslmode="require")
 
 
 
@@ -794,28 +783,31 @@ def submit():
     
 
     stream = data.get("Stream Opted in Class 12", "")
-    exam = data.get("Competitive Exam",DEFAULT_EXAMS.get(stream, "CUET"))
+    exam = data.get("Competitive Exam") or DEFAULT_EXAMS.get(stream, "CUET")
+
 
     top5 = compute_recommendations(scores, stream)
 
     con = get_db()
+    cur = con.cursor()
 
-    con.execute("""
-      INSERT INTO responses
+    cur.execute("""
+INSERT INTO responses
 (name,class_name,stream,exam,psychometric,recommendations)
-VALUES(?,?,?,?,?,?)
-
-    """, (
+VALUES (%s,%s,%s,%s,%s,%s)
+""",(
     data.get("Full Name of Student",""),
     data.get("Class",""),
-    data.get("Stream Opted in Class 12",""),
+    stream,
     exam,
     json.dumps(scores),
     json.dumps(top5)
     ))
 
     con.commit()
+    cur.close()
     con.close()
+
 
     return jsonify({"status": "stored"})
 
@@ -833,10 +825,15 @@ def login():
         p = request.form["password"]
 
         con = get_db()
-        cur = con.execute("SELECT * FROM teachers WHERE username=? AND password=?",(u,p))
+        cur = con.cursor()
+
+        cur.execute("SELECT * FROM teachers WHERE username=%s AND password=%s",(u,p))
 
         row = cur.fetchone()
+
+        cur.close()
         con.close()
+
 
         if row:
             session["teacher"] = u
@@ -852,10 +849,15 @@ def dashboard():
         return redirect("/")
 
     con = get_db()
+    cur = con.cursor()
+    cur.execute("""SELECT id,name,class_name,stream,exam,created FROM responses ORDER BY created DESC""")
 
-    rows = con.execute("""SELECT id,name,class_name,stream,exam,created FROM responses ORDER BY created DESC""").fetchall()
-
+    rows = cur.fetchall()
+    cur.close()
     con.close()
+
+
+    
 
     return render_template("dashboard.html", rows=rows)
 
@@ -871,8 +873,14 @@ def student_detail(sid):
         return redirect("/")
 
     con = get_db()
-    row = con.execute("SELECT * FROM responses WHERE id=?", (sid,)).fetchone()
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM responses WHERE id=%s",(sid,))
+    row = cur.fetchone()
+
+    cur.close()
     con.close()
+
     if not row:
         return "Student not found", 404
     
@@ -930,14 +938,19 @@ def report(sid):
         return redirect("/")
 
     con = get_db()
-    row = con.execute("SELECT * FROM responses WHERE id=?", (sid,)).fetchone()
+    cur = con.cursor()
+    cur.execute("SELECT * FROM responses WHERE id=%s",(sid,))
+    row = cur.fetchone()
+    cur.close()
     con.close()
+
 
     scores = json.loads(row[4])
     careers = json.loads(row[5])
     stream = row[3]
 
-    exam = DEFAULT_EXAMS.get(stream, "CUET")
+    exam = row[6]
+
 
     courses, _ = compute_courses(scores, exam, stream)
 
@@ -984,9 +997,13 @@ def delete_student(sid):
         return redirect("/")
 
     con=get_db()
-    con.execute("DELETE FROM responses WHERE id=?", (sid,))
+    cur = con.cursor()
+    cur.execute("DELETE FROM responses WHERE id=%s",(sid,))
     con.commit()
+    cur.close()
     con.close()
+
+    
 
     return redirect("/dashboard")
 
@@ -998,26 +1015,17 @@ def logout():
 
 @app.route("/__create_admin")
 def create_admin():
-
     con = get_db()
-
-    cur = con.execute(
-        "SELECT * FROM teachers WHERE username=?",
-        ("admin",)
-    )
-
+    cur = con.cursor()
+    cur.execute("SELECT * FROM teachers WHERE username=%s",("admin",))
     if cur.fetchone():
+        cur.close()
         con.close()
         return "Admin already exists"
-
-    con.execute("""
-        INSERT INTO teachers (username,password)
-        VALUES (?,?)
-    """, ("admin","admin123"))
-
+    cur.execute("""INSERT INTO teachers(username,password) VALUES(%s,%s)""",("admin","admin123"))
     con.commit()
-    con.close()
-
+    cur.close()
+    con.close() 
     return "Admin created successfully"
 
 # ===============================
@@ -1026,6 +1034,7 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
