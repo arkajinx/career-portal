@@ -560,6 +560,20 @@ def normalize_json(val, default):
 
     return default
 
+def normalize_recommendations(val):
+    data = normalize_json(val, [])
+
+    cleaned = []
+
+    if isinstance(data, dict):
+        data = list(data.items())
+
+    for item in data:
+        if isinstance(item, (list, tuple)) and len(item) >= 2:
+            cleaned.append((item[0], int(item[1])))
+
+    return cleaned
+
 # ===============================
 # DATABASE SETUP
 # ===============================
@@ -829,7 +843,8 @@ def submit():
     # CAREER MATCHING
     # -----------------------
 
-    top5 = compute_recommendations(scores, stream)
+    top5 = [(c, s) for c, s in compute_recommendations(scores, stream)]
+
 
     # -----------------------
     # DB INSERT
@@ -953,7 +968,7 @@ def student_detail(sid):
 
     
     scores = normalize_json(row[4], {})
-    careers = normalize_json(row[5], [])
+    careers = normalize_recommendations(row[5])
 
 
 
@@ -1003,7 +1018,7 @@ def report(sid):
 
 
     scores = normalize_json(row[4], {})
-    careers = normalize_json(row[5], [])
+    careers = normalize_recommendations(row[5])
 
 
     stream = row[3]
@@ -1093,6 +1108,7 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
