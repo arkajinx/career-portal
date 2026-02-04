@@ -965,8 +965,9 @@ def report(sid):
     con.close()
 
 
-    scores = json.loads(row[4])
-    careers = json.loads(row[5])
+    scores = row[4] or {}
+    careers = row[5] or []
+
     stream = row[3]
 
     exam = row[6]
@@ -1054,6 +1055,7 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
