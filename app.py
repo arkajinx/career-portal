@@ -542,6 +542,24 @@ DEFAULT_EXAMS = {
     "Arts": "CUET",
     "Humanities": "CUET"
 }
+def normalize_json(val, default):
+    if val is None:
+        return default
+
+    if isinstance(val, (dict, list)):
+        return val
+
+    if isinstance(val, str):
+        val = val.strip()
+        if not val:
+            return default
+        try:
+            return json.loads(val)
+        except:
+            return default
+
+    return default
+
 # ===============================
 # DATABASE SETUP
 # ===============================
@@ -917,8 +935,9 @@ def student_detail(sid):
 
 
     
-    scores = row[4] or {}
-    careers = row[5] or []
+    scores = normalize_json(row[4], {})
+    careers = normalize_json(row[5], [])
+
 
 
     courses, detected_exams = compute_courses(scores, exam, row[3])
@@ -966,8 +985,9 @@ def report(sid):
     con.close()
 
 
-    scores = row[4] or {}
-    careers = row[5] or []
+    scores = normalize_json(row[4], {})
+    careers = normalize_json(row[5], [])
+
 
     stream = row[3]
 
@@ -1056,6 +1076,7 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
