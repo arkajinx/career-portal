@@ -771,6 +771,10 @@ def submit():
         except:
             return 0
 
+    # -----------------------
+    # PSYCHOMETRIC SCORES
+    # -----------------------
+
     scores = {
         "logical": safe_int(data.get("Logical Reasoning")),
         "numerical": safe_int(data.get("Numerical Ability")),
@@ -780,37 +784,53 @@ def submit():
         "technical": safe_int(data.get("Technical Skills"))
     }
 
-    
+    stream = data.get("Stream Opted in Class 12", "").strip()
 
-    stream = data.get("Stream Opted in Class 12", "")
-    exam = data.get("Competitive Exam") or DEFAULT_EXAMS.get(stream, "CUET")
+    exam = (
+        data.get("Competitive Exam")
+        or DEFAULT_EXAMS.get(stream, "CUET")
+    )
 
+    # -----------------------
+    # CAREER MATCHING
+    # -----------------------
 
     top5 = compute_recommendations(scores, stream)
 
-    con = get_db()
-    cur = con.cursor()
+    # -----------------------
+    # DB INSERT
+    # -----------------------
 
-    cur.execute("""
-INSERT INTO responses
-(name,class_name,stream,exam,psychometric,recommendations)
-VALUES (%s,%s,%s,%s,%s,%s)
-""",(
-    data.get("Full Name of Student",""),
-    data.get("Class",""),
-    stream,
-    exam,
-    json.dumps(scores),
-    json.dumps(top5)
-    ))
+    try:
+        con = get_db()
+        cur = con.cursor()
 
-    con.commit()
-    cur.close()
-    con.close()
+        cur.execute(
+            """
+            INSERT INTO responses
+                (name, class_name, stream, exam, psychometric, recommendations)
+            VALUES
+                (%s, %s, %s, %s, %s::jsonb, %s::jsonb)
+            """,
+            (
+                data.get("Full Name of Student", "").strip(),
+                data.get("Class", "").strip(),
+                stream,
+                exam,
+                json.dumps(scores),
+                json.dumps(top5),
+            ),
+        )
 
+        con.commit()
+        cur.close()
+        con.close()
+
+    except Exception as e:
+        print("SUBMIT ERROR:", e)
+        return jsonify({"status": "error", "message": "DB insert failed"}), 500
 
     return jsonify({"status": "stored"})
-
 
 # ===============================
 # TEACHER LOGIN
@@ -1034,6 +1054,7 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
