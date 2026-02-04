@@ -746,13 +746,28 @@ def ai_summary(student, scores, careers, courses, exam=None):
     name = student[1]
     stream = student[3]
 
+    # ---------------------------
+    # NORMALIZE CAREERS FORMAT
+    # ---------------------------
+    if isinstance(careers, dict):
+        careers = list(careers.items())
+
+    if not isinstance(careers, list):
+        careers = []
+
+    # ---------------------------
+    # NORMALIZE COURSES
+    # ---------------------------
+    if isinstance(courses, dict):
+        courses = list(courses.items())
+
     ordered = sorted(scores.items(), key=lambda x: x[1], reverse=True)
 
-    strengths = [k.replace("_"," ").title() for k,_ in ordered[:3]]
-    gaps = [k.replace("_"," ").title() for k,_ in ordered[-2:]]
+    strengths = [k.replace("_", " ").title() for k, _ in ordered[:3]]
+    gaps = [k.replace("_", " ").title() for k, _ in ordered[-2:]]
 
-    top_careers = ", ".join([c[0] for c in careers[:2]])
-    top_courses = ", ".join([c[0] for c in courses[:2]])
+    top_careers = ", ".join([c[0] for c in careers[:2]]) or "multiple academic domains"
+    top_courses = ", ".join([c[0] for c in courses[:2]]) or "relevant undergraduate programmes"
 
     exam_line = ""
     if exam:
@@ -802,7 +817,8 @@ def submit():
         "technical": safe_int(data.get("Technical Skills"))
     }
 
-    stream = data.get("Stream Opted in Class 12", "").strip()
+    stream = data.get("Stream Opted in Class 12", "").title()
+
 
     exam = (
         data.get("Competitive Exam")
@@ -924,7 +940,8 @@ def student_detail(sid):
     
 
     state = request.form.get("state")
-    stream = row[3]
+    stream = row[3].title() if row[3] else ""
+
 
 
 
@@ -1076,6 +1093,7 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
