@@ -2,7 +2,10 @@ from flask import (
     Flask, request, jsonify, render_template,
     redirect, session, send_file
 )
-import sqlite3, json, os
+import json, os
+import psycopg2
+from psycopg2.extras import RealDictCursor
+
 
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table
 from reportlab.lib.pagesizes import A4
@@ -555,36 +558,44 @@ DEFAULT_EXAMS = {
 # ===============================
 
 def get_db():
-    return sqlite3.connect(DB)
+    return psycopg2.connect(os.environ["SUPABASE_DB_URL"])
+
 
 
 def init_db():
     con = get_db()
+    cur = con.cursor()
 
-    con.execute("""
-  CREATE TABLE IF NOT EXISTS responses(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    class_name TEXT,
-    stream TEXT,
-    psychometric TEXT,
-    recommendations TEXT,
-    exam TEXT,
-    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  )
-""")
+    # ---------------------------
+    # STUDENT RESPONSES
+    # ---------------------------
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS responses(
+        id SERIAL PRIMARY KEY,
+        name TEXT,
+        class_name TEXT,
+        stream TEXT,
+        psychometric JSONB,
+        recommendations JSONB,
+        exam TEXT,
+        created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
 
-
-    con.execute("""
-      CREATE TABLE IF NOT EXISTS teachers(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+    # ---------------------------
+    # TEACHERS
+    # ---------------------------
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS teachers(
+        id SERIAL PRIMARY KEY,
         username TEXT UNIQUE,
         password TEXT
-      )
+    );
     """)
 
     con.commit()
     con.close()
+
 
 
 init_db()
@@ -791,15 +802,16 @@ def submit():
 
     con.execute("""
       INSERT INTO responses
-(name,class_name,stream,psychometric,recommendations,exam)
+(name,class_name,stream,exam,psychometric,recommendations)
 VALUES(?,?,?,?,?,?)
 
     """, (
-        data.get("Full Name of Student",""),
-        data.get("Class",""),
-        data.get("Stream Opted in Class 12",""),
-        json.dumps(scores),
-        json.dumps(top5),exam
+    data.get("Full Name of Student",""),
+    data.get("Class",""),
+    data.get("Stream Opted in Class 12",""),
+    exam,
+    json.dumps(scores),
+    json.dumps(top5)
     ))
 
     con.commit()
@@ -1014,6 +1026,7 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
