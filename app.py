@@ -802,7 +802,22 @@ Relative improvement is recommended in {', '.join(gaps)}. Targeted mentoring, co
 Overall, the student shows promising academic potential when guided through a structured, data-driven counselling and preparation framework.
 """
 
+def normalize_stream(raw):
+    if not raw:
+        return ""
 
+    raw = raw.lower()
+
+    if "sci" in raw:
+        return "Science"
+
+    if "comm" in raw:
+        return "Commerce"
+
+    if "art" in raw or "human" in raw:
+        return "Arts"
+
+    return raw.title()
 # ===============================
 # GOOGLE FORM API
 # ===============================
@@ -831,7 +846,7 @@ def submit():
         "technical": safe_int(data.get("Technical Skills"))
     }
 
-    stream = data.get("Stream Opted in Class 12", "").title()
+    stream = normalize_stream(data.get("Stream Opted in Class 12", ""))
 
 
     exam = (
@@ -1108,6 +1123,7 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
