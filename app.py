@@ -979,7 +979,7 @@ def student_detail(sid):
 
 
 
-    stored_exam = row[6]
+    
 
     exam = request.form.get("exam",stored_exam or DEFAULT_EXAMS.get(stream, "CUET"))
     if isinstance(exam, list):
@@ -988,9 +988,9 @@ def student_detail(sid):
 
 
 
-    
-    scores = normalize_json(row[4], {})
-    careers = normalize_recommendations(row[5])
+    stored_exam = row[4]
+    scores = normalize_json(row[5], {})
+    careers = normalize_recommendations(row[6])
 
 
 
@@ -1039,13 +1039,13 @@ def report(sid):
     con.close()
 
 
-    scores = normalize_json(row[4], {})
-    careers = normalize_recommendations(row[5])
+    scores = normalize_json(row[5], {})
+    careers = normalize_recommendations(row[6])
 
 
     stream = row[3]
 
-    exam = row[6]
+    exam = row[4]
 
 
     courses, _ = compute_courses(scores, exam, stream)
@@ -1130,6 +1130,7 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
