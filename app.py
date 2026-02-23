@@ -13,7 +13,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret")
-
+db_initialized = False
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -592,17 +592,17 @@ def init_db():
     # STUDENT RESPONSES
     # ---------------------------
     cur.execute("""
-    CREATE TABLE IF NOT EXISTS responses(
-        id SERIAL PRIMARY KEY,
-        name TEXT,
-        class_name TEXT,
-        stream TEXT,
-        psychometric JSONB,
-        recommendations JSONB,
-        exam TEXT,
-        created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-    """)
+CREATE TABLE IF NOT EXISTS responses(
+    id SERIAL PRIMARY KEY,
+    name TEXT,
+    class_name TEXT,
+    stream TEXT,
+    exam TEXT,
+    psychometric JSONB,
+    recommendations JSONB,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+""")
 
     # ---------------------------
     # TEACHERS
@@ -976,12 +976,11 @@ def student_detail(sid):
 
     state = request.form.get("state")
     stream = row[3].title() if row[3] else ""
-
-
-
-
     
-
+    
+    
+    
+    stored_exam = row[4]
     exam = request.form.get("exam",stored_exam or DEFAULT_EXAMS.get(stream, "CUET"))
     if isinstance(exam, list):
         exam = exam[0] if exam else "CUET"
@@ -989,7 +988,7 @@ def student_detail(sid):
 
 
 
-    stored_exam = row[4]
+    
     scores = normalize_json(row[5], {})
     careers = normalize_recommendations(row[6])
 
@@ -1128,16 +1127,17 @@ def create_admin():
 # ===============================
 # RUN
 # ===============================
-# ---- SAFE DB INITIALIZATION FOR FLASK 3 ----
+
 with app.app_context():
     try:
         init_db()
-        print("Database initialized successfully")
+        print("DB initialized at startup")
     except Exception as e:
-        print("Database initialization failed:", e)
+        print("DB init failed:", e)
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
