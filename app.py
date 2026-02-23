@@ -691,11 +691,15 @@ def compute_courses(scores, exams=None, stream=None):
 
 
 def estimate_cutoff(scores, exam):
+    
 
     avg = sum(scores.values()) / max(len(scores), 1)
 
 
-    exam = (exam or "").upper()
+    if isinstance(exam, list):
+        exam = exam[0] if exam else ""
+
+    exam = str(exam).upper()
 
     # -------------------------
     # ENGINEERING
@@ -978,6 +982,9 @@ def student_detail(sid):
     stored_exam = row[6]
 
     exam = request.form.get("exam",stored_exam or DEFAULT_EXAMS.get(stream, "CUET"))
+    if isinstance(exam, list):
+        exam = exam[0] if exam else "CUET"
+    
 
 
 
@@ -987,7 +994,7 @@ def student_detail(sid):
 
 
 
-    courses, detected_exams = compute_courses(scores, exam, row[3])
+    courses, detected_exams = compute_courses(scores, str(exam), row[3])
 
     cutoff = estimate_cutoff(scores, exam)
 
@@ -1123,6 +1130,7 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
