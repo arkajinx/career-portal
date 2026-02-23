@@ -13,6 +13,14 @@ from reportlab.lib.styles import getSampleStyleSheet
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret")
+# ---- SAFE STARTUP DB INIT ----
+@app.before_first_request
+def startup():
+    try:
+        init_db()
+        print("Database initialized successfully")
+    except Exception as e:
+        print("Database initialization failed:", e)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -619,7 +627,7 @@ def init_db():
 
 
 
-init_db()
+
 
 # ===============================
 # CORE ENGINES
@@ -1130,6 +1138,7 @@ def create_admin():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
