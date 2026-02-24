@@ -580,7 +580,7 @@ def normalize_recommendations(val):
 # ===============================
 
 def get_db():
-    return psycopg2.connect(os.environ["SUPABASE_DB_URL"],sslmode="require")
+    return psycopg2.connect(os.environ["SUPABASE_DB_URL"],sslmode="require",connect_timeout=5,keepalives=1,keepalives_idle=30,keepalives_interval=10,keepalives_count=5)
 
 
 
@@ -1128,15 +1128,12 @@ def create_admin():
 # RUN
 # ===============================
 
-with app.app_context():
-    try:
-        init_db()
-        print("DB initialized at startup")
-    except Exception as e:
-        print("DB init failed:", e)
+
 
 if __name__ == "__main__":
+    init_db()
     app.run(debug=True)
+
 
 
 
