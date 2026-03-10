@@ -1,0 +1,46 @@
+function onFormSubmit(e) {
+
+  if (!e || !e.namedValues) {
+    Logger.log("No event object");
+    return;
+  }
+
+  const v = e.namedValues;
+
+  const payload = {
+
+    "Full Name of Student": v["Full Name of Student"]?.[0] || "",
+    "Class": v["Class"]?.[0] || "",
+    "Stream Opted in Class 12": v["Stream Opted in Class 12"]?.[0] || "",
+
+    "Logical Reasoning": v["Logical Reasoning: (1 = low, 5 = excellent)"]?.[0] || "",
+    "Numerical Ability": v["Numerical Ability: (1 = low, 5 = excellent)"]?.[0] || "",
+    "Creativity": v["Creativity: (1 = low, 5 = excellent)"]?.[0] || "",
+    "Communication Skills": v["Communication Skills: (1 = low, 5 = excellent)"]?.[0] || "",
+    "Leadership Skills": v["Leadership Skills: (1 = low, 5 = excellent)"]?.[0] || "",
+    "Technical Skills": v["Technical Skills: (1 = low, 5 = excellent)"]?.[0] || "",
+
+    "Problem Approach": v["When faced with a problem, you mostly:"]?.[0] || "",
+    "Group Role": v["In a group project, you prefer to:"]?.[0] || "",
+    "Motivation": v["You feel most motivated when:"]?.[0] || "",
+    "Work Style": v["Which describes your work style?"]?.[0] || "",
+    "Career Preference": v["You prefer careers that:"]?.[0] || "",
+    "Career Values": v["What do you value most in a career?"]?.[0] || "",
+    "Decision Style": v["You make decisions mostly based on:"]?.[0] || "",
+
+    "Fields Interested": (v["Fields You Are Interested In (Select all that apply)"] || []).join(","),
+    "Dream Career": v["Your Dream Career (If any)"]?.[0] || ""
+  };
+
+  const url = "https://career-portal-65co.onrender.com/submit";
+
+  const res = UrlFetchApp.fetch(url, {
+    method: "post",
+    contentType: "application/json",
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  });
+
+  Logger.log("STATUS:", res.getResponseCode());
+  Logger.log("RESPONSE:", res.getContentText());
+}
